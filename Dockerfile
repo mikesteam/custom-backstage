@@ -10,6 +10,8 @@ WORKDIR /opt/build
 COPY . .
 
 RUN chown -R 1000 /opt/build && \
+    ls -lat /opt/build && \
+    pwd && \
     yarn install && \
     yarn tsc && \
     yarn build:backend
