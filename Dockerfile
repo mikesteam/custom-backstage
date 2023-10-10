@@ -1,6 +1,7 @@
 FROM fedora:38
 
-RUN sudo dnf -y install nodejs && \
+RUN sudo dnf install -y gcc-c++ make && \
+    dnf -y install nodejs && \
     npm install --global yarn && \
     yarn -v
 
