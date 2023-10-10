@@ -1,15 +1,15 @@
-FROM registry.access.redhat.com/ubi9/ubi:9.2
+FROM fedora:38
 
-RUN dnf install nodejs \
-    npm install --global yarn \
-
-USER yarn
+RUN dnf -y install nodejs && \
+    npm install --global yarn
 
 WORKDIR /opt/build
 
 COPY . .
 
-RUN chown -R yarn /opt/build \
+RUN chown -R 1000 /opt/build && \
     yarn install
+
+USER 1000
 
 ENTRYPOINT ["yarn", "start"]
