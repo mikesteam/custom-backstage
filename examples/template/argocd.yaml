@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: custom-backstage
+spec:
+  destination:
+    namespace: argocd-backstage
+    server: https://kubernetes.default.svc
+  project: custom-backstage
+  source:
+    path: /examples/template/base
+    repoURL: https://github.com/mikesteam/custom-backstage
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
