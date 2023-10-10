@@ -3,14 +3,16 @@ FROM fedora:38
 RUN dnf install -y gcc-c++ make && \
     dnf -y install nodejs && \
     npm install --global yarn && \
-    yarn -v
+    yarn config set python /usr/bin/python3
 
 WORKDIR /opt/build
 
 COPY . .
 
 RUN chown -R 1000 /opt/build && \
-    yarn install
+    yarn install && \
+    yarn tsc && \
+    yarn build:backend
 
 USER 1000
 
